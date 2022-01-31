@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Productionlaits list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Qtelait</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for productionlait in productionlaits %}
+            <tr>
+                <td><a href="{{ path('productionlait_show', { 'id': productionlait.id }) }}">{{ productionlait.id }}</a></td>
+                <td>{% if productionlait.date %}{{ productionlait.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ productionlait.qtelait }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('productionlait_show', { 'id': productionlait.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('productionlait_edit', { 'id': productionlait.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('productionlait_new') }}">Create a new productionlait</a>
+        </li>
+    </ul>
+{% endblock %}

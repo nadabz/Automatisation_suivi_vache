@@ -1,0 +1,45 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h2>Ajouter Ration</h2>
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-info" href="{{ path('ration_index') }}"><span class="fa fa-bars"></span> Liste des
+                        rations</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(form.typeVache) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.race) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.trancheAge) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            {{ form_row(form.aliment) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.qteADistribuer) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Enregistrer"/>
+        </div>
+    </div>
+    {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}

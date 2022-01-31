@@ -1,0 +1,36 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body %}
+    <h1>Consultation</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ consultation.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if consultation.date %}{{ consultation.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Observation</th>
+                <td>{{ consultation.observation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('consultation_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('consultation_edit', { 'id': consultation.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

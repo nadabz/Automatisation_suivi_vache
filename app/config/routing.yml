@@ -1,0 +1,89 @@
+pfe_suivi_vache_ligne:
+    resource: "@PfeSuiviVacheBundle/Controller/LigneController.php"
+    type:     annotation
+
+pfe_suivi_vache_ordonnance:
+    resource: "@PfeSuiviVacheBundle/Controller/OrdonnanceController.php"
+    type:     annotation
+
+pfe_suivi_vache_page:
+    resource: "@PfeSuiviVacheBundle/Controller/PageController.php"
+    type:     annotation
+
+pfe_suivi_vache_reception:
+    resource: "@PfeSuiviVacheBundle/Controller/ReceptionController.php"
+    type:     annotation
+
+pfe_suivi_vache_medicament:
+    resource: "@PfeSuiviVacheBundle/Controller/MedicamentController.php"
+    type:     annotation
+
+pfe_suivi_vache_fournisseur:
+    resource: "@PfeSuiviVacheBundle/Controller/FournisseurController.php"
+    type:     annotation
+
+pfe_suivi_vache_consultation:
+    resource: "@PfeSuiviVacheBundle/Controller/ConsultationController.php"
+    type:     annotation
+
+pfe_suivi_vache_distrubtion_aliment:
+    resource: "@PfeSuiviVacheBundle/Controller/DistrubtionAlimentController.php"
+    type:     annotation
+
+pfe_suivi_vache_productionlait:
+    resource: "@PfeSuiviVacheBundle/Controller/ProductionlaitController.php"
+    type:     annotation
+
+pfe_suivi_vache_ration:
+    resource: "@PfeSuiviVacheBundle/Controller/RationController.php"
+    type:     annotation
+
+pfe_suivi_vache_lot:
+    resource: "@PfeSuiviVacheBundle/Controller/LotController.php"
+    type:     annotation
+
+pfe_suivi_vache_tranche_age:
+    resource: "@PfeSuiviVacheBundle/Controller/TrancheAgeController.php"
+    type:     annotation
+
+pfe_suivi_vache_suivi_poids:
+    resource: "@PfeSuiviVacheBundle/Controller/SuiviPoidsController.php"
+    type:     annotation
+
+pfe_suivi_vache_type_vache:
+    resource: "@PfeSuiviVacheBundle/Controller/TypeVacheController.php"
+    type:     annotation
+
+pfe_suivi_vache_race:
+    resource: "@PfeSuiviVacheBundle/Controller/RaceController.php"
+    type:     annotation
+
+pfe_suivi_vache_etable:
+    resource: "@PfeSuiviVacheBundle/Controller/EtableController.php"
+    type:     annotation
+
+pfe_suivi_vache_aliment:
+    resource: "@PfeSuiviVacheBundle/Controller/AlimentController.php"
+    type:     annotation
+
+pfe_suivi_vache_vache:
+    resource: "@PfeSuiviVacheBundle/Controller/VacheController.php"
+    type:     annotation
+
+site_annonce_user:
+    resource: "@GestionUserBundle/Controller/UserController.php"
+    type:     annotation
+
+
+login:
+    path: /login
+    defaults:
+        _controller: GestionUserBundle:Security:login
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
+    defaults:
+        _controller: GestionUserBundle:Security:login

@@ -1,0 +1,28 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+{% block title %}Modifier race{% endblock %}
+{% block title_parag %}Modifier race{% endblock %}
+{% block body %}
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-info" href="{{ path('race_index') }}"><span class="fa fa-bars"></span> Liste des races</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{ form_start(edit_form) }}
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(edit_form.libelle) }}
+    </div>
+    <ul class="liste_btn_action">
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-success" value="Enregistre" /></div></div></ul></div>
+    {{ form_end(edit_form) }}
+
+
+{% endblock %}

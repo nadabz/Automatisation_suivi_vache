@@ -1,0 +1,53 @@
+{% extends 'layout_admin.html.twig' %}
+{% block title %}Liste des Fournisseurs {% endblock %}
+{% block body %}
+<h2>Liste des Fournisseurs</h2>
+<hr class="hr_titre_page">
+<div class="row marg_bot_20">
+    <div class="col-md-12">
+        <ul class="liste_btn_action">
+            <li>
+                <a class="btn btn-primary" href="{{ path('fournisseur_new') }}"><span class="fa fa-plus"></span> Nouveau
+                    Fournisseur </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Code </th>
+                <th>Nom & prénom </th>
+                <th>Adresse</th>
+                <th>Tel</th>
+                <th class="text-right" >Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fournisseur in fournisseurs %}
+            <tr>
+                <td>{{ fournisseur.code }}</td>
+
+                <td>{{ fournisseur.nom }}</td>
+                <td>{{ fournisseur.adresse }}</td>
+                <td>{{ fournisseur.tel }}</td>
+                <td>
+                        <ul class="liste_btn_action">
+
+                        <li>
+                            <a class="btn btn-info btn-xs" href="{{ path('fournisseur_show', { 'id': fournisseur.id }) }}"><span class="fa fa-info">Détails</span> </a>
+                        </li>
+                        <li>
+                            <a class="btn btn-warning btn-xs" href="{{ path('fournisseur_edit', { 'id': fournisseur.id }) }}"><span class="fa fa-edit"></span>Modifier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div></div>
+{% endblock %}

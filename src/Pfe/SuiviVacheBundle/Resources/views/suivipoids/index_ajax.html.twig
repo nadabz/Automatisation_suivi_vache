@@ -1,0 +1,24 @@
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>N° lot</th>
+                <th>Etable</th>
+                <th>Type vache</th>
+                <th>Tranche age </th>
+                <th>Race</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lot in tab_lot %}
+            <tr>
+                <td>{{ lot.numLot }}</td>
+                <td>{{ lot.etable.numero }}</td>
+                <td>{{ lot.typevache.type }}</td>
+                <td> {{ lot.trancheage.libTrancheAge }}</td>
+                <td>{{ lot.race.libelle }}</td>
+                <td><button type="button" class="btn btn-primary btn-xs valid_affect_vache" url="{{ path('affectation_vache') }}" id_lot="{{ lot.id }}" id_vache="{{ vache.id }}"><span class="fa fa-check"></span> </button> </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>

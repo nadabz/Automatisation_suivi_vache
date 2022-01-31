@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lignes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Qterecu</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligne in lignes %}
+            <tr>
+                <td><a href="{{ path('ligne_show', { 'id': ligne.id }) }}">{{ ligne.id }}</a></td>
+                <td>{{ ligne.qterecu }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ligne_show', { 'id': ligne.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ligne_edit', { 'id': ligne.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ligne_new') }}">Create a new ligne</a>
+        </li>
+    </ul>
+{% endblock %}

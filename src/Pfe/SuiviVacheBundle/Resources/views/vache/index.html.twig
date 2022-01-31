@@ -1,0 +1,238 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% block title %}Liste des vaches{% endblock %}
+{% block body %}
+    <h2>Liste des vaches</h2>
+    <hr class="hr_titre_page">
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                {% if not is_granted('ROLE_VETIRINAIRE') %}
+
+                <li>
+                    <a class="btn btn-primary" href="{{ path('vache_new') }}"><span class="fa fa-plus"></span> Nouvelle
+                        vache</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form_row(form.numero,{'value':app.request.get('numero')}) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_row(form.ageMin,{'value':app.request.get('ageMin')}) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_row(form.ageMax,{'value':app.request.get('ageMax')}) }}
+                </div>
+                <div class="col-md-3" style="margin-top: 25px;">
+                    <button type="submit" class="btn btn-success"><span class="fa fa-search"></span></button>
+                    <a href="{{ path('vache_index') }}" class="btn btn-danger"><span class="fa fa-times"></span></a>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Lot</th>
+                    <th>Age</th>
+                    <th>Date de naissance</th>
+                    <th>Poid naissance</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for vache in vaches %}
+                    <tr>
+                        <td>{{ vache.numero }}</td>
+                        <td id="num_lot_{{ vache.id }}">{% if vache.lot.numLot is defined %}{{ vache.lot.numLot }}{% else %}-{% endif %}</td>
+                        <td>{{ vache.age }}</td>
+                        <td>{% if vache.dateNaissance %}{{ vache.dateNaissance|date('d/m/Y') }}{% endif %}</td>
+                        <td>{{ vache.poidNaissance }}</td>
+                        <td>
+                            <ul class="liste_btn_action">
+                                {% if not is_granted('ROLE_VETIRINAIRE') %}
+                                <li>
+                                    <a class="btn btn-warning btn-xs"
+                                       href="{{ path('vache_edit', { 'id': vache.id }) }}"><span
+                                                class="fa fa-edit"></span> Modifier</a>
+
+                                </li>
+                                {% endif %}
+                                <li>
+                                    <a class="btn btn-info btn-xs" href="{{ path('vache_show', { 'id': vache.id }) }}"><span
+                                                class="fa fa-info"></span> Détails</a>
+                                </li>
+                                {% if is_granted('ROLE_VETIRINAIRE') %}
+                                    <li>
+                                        <a class="btn btn-warning btn-xs"
+                                           href="{{ path('vache_consultation', { 'id': vache.id }) }}"><span
+                                                    class="fa fa-edit"></span> Consultation</a>
+
+                                    </li>
+                                {% endif %}
+                                {% if vache.lot.numLot is defined %}
+                                    {% if vache.lot.typeVache.id=='1' %}
+                                        {% if not is_granted('ROLE_VETIRINAIRE') %}
+
+                                            <li>
+                                            <button type="button" class="btn btn_violet btn-xs btn_suivi_poids"
+                                                    num_vache="{{ vache.numero }}"
+                                                    id_vache="{{ vache.id }}"
+                                                    url="{{ path('suivi_poids_vache') }}">Suivi poids
+                                            </button>
+                                        </li>
+                                        {% endif %}
+
+                                    {% else %}
+                                        <li>
+                                        {% if not is_granted('ROLE_VETIRINAIRE') %}
+
+                                            <button type="button" class="btn btn-success btn-xs btn_suivi_production"
+                                                num_vache="{{ vache.numero }}"
+                                                id_vache="{{ vache.id }}"
+                                                url="{{ path('production_lait_vache') }}">Suivi production
+                                            </button>
+                                        </li>
+                                        {% endif %}
+
+                                    {% endif %}
+                                {% else %}
+                                    <li>
+                                        {% if not is_granted('ROLE_VETIRINAIRE') %}
+
+                                        <button type="button" id="btn_affect_{{ vache.id }}"
+                                                url="{{ path('lot_index_ajax') }}"
+                                                num_vache="{{ vache.numero }}"
+                                                class="btn btn-success btn-xs affecter_vache">Affecter
+                                        </button>
+                                    </li>
+                                        {% endif %}
+
+                                {% endif %}
+                                <li class="ajax_btn_sui_poids" id="ajax_btn_sui_poids_{{ vache.id }}">
+                                    <button type="button" class="btn btn_violet btn-xs btn_suivi_poids"
+                                            num_vache="{{ vache.numero }}"
+                                            id_vache="{{ vache.id }}"
+                                            url="{{ path('suivi_poids_vache') }}">Suivi poids
+                                    </button>
+                                </li>
+                                <li class="ajax_btn_sui_prod" id="ajax_btn_sui_prod_{{ vache.id }}">
+                                    <button type="button" class="btn btn-success btn-xs"
+                                        num_vache="{{ vache.numero }}"
+                                        id_vache="{{ vache.id }}"
+                                        url="{{ path('production_lait_vache') }}">Suivi production
+                                    </button>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="navigation">
+                {{ knp_pagination_render(vaches) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAffectation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="titre_modal_affect">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="loading_affect">
+                        <img src="{{ asset('images/loading.svg') }}">
+                    </div>
+                    <div id="body_modal_affect">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                        <img src="{{ asset('images/loading.svg') }}" class="loading_exec">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalSuiviPoids" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="titre_modal_suivi_poids"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="loading_affect">
+                        <img src="{{ asset('images/loading.svg') }}">
+                    </div>
+                    <div id="body_modal_suivi_poids">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="poids_vache">Poids vache</label>
+                                <input type="text" id="poids_vache" class="form-control">
+                                <div class="err_suivi_poids"></div>
+
+                            </div>
+                        </div>
+                        <input type="hidden" id="id_vache_sui_poids">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary btn_save_sui_poids">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modalSuiviProduction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="titre_modal_suivi_production"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="loading_affect">
+                        <img src="{{ asset('images/loading.svg') }}">
+                    </div>
+                    <div id="body_modal_suivi_production">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="production_vache">Production laitiére </label>
+                                <input type="text" id="production_vache" class="form-control">
+                                <div class="err_prod_lait"></div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="id_vache_sui_production">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary btn_save_sui_production">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

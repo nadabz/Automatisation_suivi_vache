@@ -1,0 +1,176 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body %}
+    <h2>Détails vache</h2>
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-danger supprimer_element"
+                            msg="Voulez-vous supprimer cette vache"><span class="fa fa-trash-alt"></span> Supprimer
+                    </button>
+                    {{ form_end(delete_form) }}
+                </li>
+                <li>
+                    <a class="btn btn-info" href="{{ path('vache_index') }}"><span class="fa fa-bars"></span> Liste des
+                        vaches</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th>Numero</th>
+                    <td>{{ vache.numero }}</td>
+                </tr>
+                <tr>
+                    <th>Type Vache</th>
+                    <td>{{ vache.typeVache.type }}</td>
+                </tr>
+                <tr>
+                    <th>Race</th>
+                    <td>{{ vache.race.libelle }}</td>
+                </tr>
+                <tr>
+                    <th>Lot</th>
+                    <td>{% if vache.lot.numLot is defined %}{{ vache.lot.numLot }}{% else %}-{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td>{{ vache.age }}</td>
+                </tr>
+                <tr>
+                    <th>Datenaissance</th>
+                    <td>{% if vache.dateNaissance %}{{ vache.dateNaissance|date('d-m-Y') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Poidnaissance</th>
+                    <td>{{ vache.poidNaissance }}</td>
+                </tr>
+                <tr>
+                    <th>Vache mère</th>
+                    <td>{% if vache.vacheMere.numero is defined %}
+                            <a href="{{ path('vache_show',{'id':vache.vacheMere.id}) }}">{{ vache.vacheMere.numero }}</a>
+                        {% else %}-{% endif %}</td>
+                </tr>
+                <th>Fournisseur</th>
+                <td>{% if vache.fournisseur.nom is defined %}{{ vache.fournisseur.nom }}{% else %}-{% endif %}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% if vache.lot.numLot is defined %}
+                {% if vache.lot.typeVache.id=='1' %}
+                    <div class="portlet-grid  panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Suivi Poids</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% if vache.suiviPoids|length ==0 %}
+                                <div class="alert alert-warning">Aucun suivi poids disponible</div>
+                            {% else %}
+                                <table class="table">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Poids</th>
+                                    </tr>
+                                    {% for poids in vache.suiviPoids %}
+                                        <tr>
+                                            <td>{% if poids.dateSuivi %}{{ poids.dateSuivi|date('d/m/Y') }}{% endif %}</td>
+                                            <td>{{ poids.poidsActuel }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if vache.lot.typeVache.id=='2' %}
+                    <div class="portlet-grid  panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Suivi Production</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            {% if vache.productionLaits|length ==0 %}
+
+                                <div class="alert alert-warning">Aucun suivi production disponible</div>
+                            {% else %}
+                                <table class="table">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Production</th>
+                                    </tr>
+                                    {% for prod in vache.productionLaits %}
+                                        <tr>
+                                            <td>{% if prod.date %}{{ prod.date|date('d/m/Y') }}{% endif %}</td>
+                                            <td>{{ prod.qteLait }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if vache.distrubtionAliments %}
+                    <div class="portlet-grid panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Distribution aliment</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% if vache.distrubtionAliments|length ==0 %}
+                                <div class="alert alert-warning">Aucune distribution d'aliment disponible</div>
+                            {% else %}
+                                <table class="table">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Aliment</th>
+                                        <th>Qte</th>
+                                    </tr>
+                                    {% for distrub in vache.distrubtionAliments %}
+                                        <tr>
+                                            <td>{% if distrub.dateDistribution %}{{ distrub.dateDistribution|date('d/m/Y') }}{% endif %}</td>
+                                            <td>{{ distrub.aliment.designation }}</td>
+                                            <td>{{ distrub.qtedistribue }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            {% if vache.vacheEnfants|length>0 %}
+                    <div class="portlet-grid  panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Vache décendant</h3>
+                        </div>
+                        <div class="panel-body">
+
+                                <table class="table">
+                                    <tr>
+                                        <th>Vache</th>
+                                        <th>date naissance</th>
+                                    </tr>
+                                    {% for vacheDesc in vache.vacheEnfants %}
+                                        <tr>
+                                            <td><a href="{{ path('vache_show',{'id':vacheDesc.id}) }}">{{ vacheDesc.numero }}</a></td>
+                                            <td>{% if vacheDesc.dateNaissance %}{{ vacheDesc.dateNaissance|date('d-m-Y') }}{% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                        </div>
+                    </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

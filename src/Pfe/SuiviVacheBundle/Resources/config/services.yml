@@ -1,0 +1,4 @@
+services:
+#    pfe_suivi_vache.example:
+#        class: Pfe\SuiviVacheBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

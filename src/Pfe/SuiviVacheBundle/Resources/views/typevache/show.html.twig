@@ -1,0 +1,28 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body %}
+<div class="row marg_bot_20">
+    <div class="col-md-12">
+        <ul class="liste_btn_action">
+            <li>
+                {{ form_start(delete_form) }}
+                <button type="submit" class="btn btn-danger supprimer_element" msg="Voulez-vous supprimer cette race" ><span class="fa fa-trash-alt"></span> Supprimer</button>
+                {{ form_end(delete_form) }}
+            </li>
+            <li>
+                <a class="btn btn-info" href="{{ path('typevache_index') }}"><span class="fa fa-bars"></span> les types des vaches</a>
+            </li>
+        </ul>
+    </div>
+
+    <table class="table table-striped">
+        <tbody>
+
+            <tr>
+                <th>Type</th>
+                <td>{{ typeVache.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

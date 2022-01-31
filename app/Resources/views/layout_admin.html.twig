@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{% block title %}Administration{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        } </script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all">
+    <!-- Custom Theme files -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all"/>
+    <!--js-->
+    <script src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>
+    <!--icons-css-->
+    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main_admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
+    <!--Google Fonts-->
+    <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div class="page-container">
+    <div class="left-content">
+        <div class="mother-grid-inner">
+            <!--header start here-->
+            <div class="header-main">
+                <div class="header-left">
+                    <div class="logo-name">
+                        <a href="{{ path('page_accueil') }}"><h1>La ferme</h1>
+                            <!--<img id="logo" src="" alt="Logo"/>-->
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="header-right">
+                    <div class="profile_details_left"><!--notifications of menu start -->
+                        <ul class="nofitications-dropdown">
+
+                            <li class="dropdown head-dpdn">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                                            class="fa fa-bell"></i><span class="badge blue"></span></a>
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <div class="notification_header">
+                                        </div>
+                                    </li>
+                                    <li><a href="#">
+
+                                            <div class="clearfix"></div>
+                                        </a></li>
+                                    <li class="odd"><a href="#">
+
+                                            <div class="clearfix"></div>
+                                        </a></li>
+                                    <li><a href="#">
+
+                                            <div class="clearfix"></div>
+                                        </a></li>
+                                    <li>
+
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--notification menu end -->
+                    <div class="profile_details">
+                        <ul>
+                            <li class="dropdown profile_details_drop">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <div class="profile_img">
+                                        <span class="prfil-img"></span>
+                                        <div class="user-name">
+                                            <p>{{ app.user.firstName }} {{ app.user.lastName }}</p>
+                                            <span>Administrator</span>
+                                        </div>
+                                        <i class="fa fa-angle-down lnr"></i>
+                                        <i class="fa fa-angle-up lnr"></i>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu drp-mnu">
+                                    <li><a href="{{ path('user_show',{'id':app.user.id}) }}"><i class="fa fa-user"></i>
+                                            Mon profil</a></li>
+                                    <li><a href="{{ path('logout') }}"><i class="fa fa-sign-out-alt"></i> Déconnexion</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!--heder end here-->
+            <!-- script-for sticky-nav -->
+            <script>
+                $(document).ready(function () {
+                    var navoffeset = $(".header-main").offset().top;
+                    $(window).scroll(function () {
+                        var scrollpos = $(window).scrollTop();
+                        if (scrollpos >= navoffeset) {
+                            $(".header-main").addClass("fixed");
+                        } else {
+                            $(".header-main").removeClass("fixed");
+                        }
+                    });
+
+                });
+
+            </script>
+
+            <!-- /script-for sticky-nav -->
+            <!--inner block start here-->
+            <div class="inner-block">
+                <div class="blank">
+                    {% for type in ['danger', 'info', 'success'] %}
+                        {% for flash_message in app.session.flashBag.get(type) %}
+                            <div class="alert alert-{{ type }} m_t_20" role="alert">
+                                {{ flash_message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    <div class="blankpage-main">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+            <!--inner block end here-->
+            <!--copy rights start here-->
+            <div class="copyrights">
+                <p>© 2019 La ferme. Tous droits réservés, créer par <a href="mailto:nada@gmail.com" target="_blank">BOUZIDI Nada</a></p>
+            </div>
+            <!--COPY rights end here-->
+        </div>
+    </div>
+    <!--slider menu-->
+    <div class="sidebar-menu">
+        <div class="logo"><a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="#"> <span
+                        id="logo"></span>
+                <!--<img id="logo" src="" alt="Logo"/>-->
+            </a></div>
+
+        <div class="menu">
+            <ul id="menu">
+                <li id="menu-home"><a href="{{ path('vache_index') }}"><i
+                                class="fa fa-hippo"></i><span>Vaches</span></a>
+                </li>
+                {% if not is_granted('ROLE_VETIRINAIRE') %}
+
+                <li id="menu-home"><a href="{{ path('etable_index') }}"><i
+                                class="fa fa-dungeon"></i><span>Etables</span></a></li>                {% endif %}
+
+                {% if not is_granted('ROLE_VETIRINAIRE') %}
+
+                <li id="menu-home"><a href="{{ path('lot_index') }}"><i
+                                class="fa fa-door-open"></i><span>Lots</span></a></li>                {% endif %}
+
+                {% if not is_granted('ROLE_VETIRINAIRE') %}
+                <li><a href="#"><i class="fa fa-snowflake"></i><span>Aliments</span><span class="fa fa-angle-right"
+                                                                                           style="float: right"></span></a>
+                    <ul>
+
+                        <li id="menu-home"><a href="{{ path('aliment_index') }}"><span> Liste Aliments</span></a></li>
+                    <li><a href="{{ path('reception_index') }}">Réception Aliment </a></li>
+                    </ul>
+                </li>
+                {% endif %}
+                <li><a href="#"><i class="fa fa-cogs"></i><span>Configurations</span><span class="fa fa-angle-right"
+                                                                                           style="float: right"></span></a>
+                    <ul>
+                        {% if not is_granted('ROLE_VETIRINAIRE') %}
+
+                        <li><a href="{{ path('trancheage_index') }}">Catégorie age</a></li>
+                        <li><a href="{{ path('typevache_index') }}">Type vache</a></li>
+                        <li><a href="{{ path('race_index') }}">Race vache</a></li>
+                        <li><a href="{{ path('ration_index') }}">Ration</a></li>
+                        <li><a href="{{ path('fournisseur_index') }}">Fournisseur </a></li>
+                        {% endif %}
+                        {% if  is_granted('ROLE_VETIRINAIRE') %}
+
+                        <li><a href="{{ path('medicament_index') }}">Medicament </a></li>
+
+                        {% endif %}
+
+
+                        {% if is_granted('ROLE_ADMIN') %}
+
+                            <li><a href="{{ path('user_index') }}">Utilisateur</a></li>
+                        {% endif %}
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<!--slide bar menu end here-->
+<script>
+    var toggle = true;
+
+    $(".sidebar-icon").click(function () {
+        if (toggle) {
+            $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+            $("#menu span").css({"position": "absolute"});
+        }
+        else {
+            $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+            setTimeout(function () {
+                $("#menu span").css({"position": "relative"});
+            }, 400);
+        }
+        toggle = !toggle;
+    });
+</script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.fr.js') }}"></script>
+<script src="{{ asset('js/main_admin.js') }}"></script>
+<!-- mother grid end here-->
+{% block javascripts %}{% endblock %}
+</body>
+</html>

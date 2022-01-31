@@ -1,0 +1,55 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body %}
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-primary" href="{{ path('ration_new') }}"><span class="fa fa-plus"></span> Nouveau ration </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <th>Quantité a distribuer</th>
+                <th>Type vache </th>
+                <th>Race </th>
+
+                <th>Tranche age </th>
+                <th>Code Aliment</th>
+
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ration in rations %}
+            <tr>
+                <td>{{ ration.qteADistribuer }}</td>
+                <td>{{ ration.race.libelle }}</td>
+
+                <td>{{ ration.typevache.type }}</td>
+                <td> {{ ration.trancheage.libTrancheAge }}</td>
+                 <td> {{ ration.aliment.code}}</td>
+
+
+                <td>
+                    <ul class="liste_btn_action">
+                        <li>
+                            <a class="btn btn-warning btn-xs" href="{{ path('ration_edit', { 'id': ration.id }) }}"><span class="fa fa-edit"></span> Modifier</a>
+                        </li>
+                        <li>
+                            <a  class="btn btn-info btn-xs" href="{{ path('ration_show', { 'id': ration.id }) }}"><span class="fa fa-info"></span> Détails</a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

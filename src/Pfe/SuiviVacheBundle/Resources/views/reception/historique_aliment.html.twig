@@ -1,0 +1,18 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Fournisseur</th>
+        <th>Qte reçu</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for reception in receptions %}
+        <tr>
+            <td>{% if reception.dateReception %}{{ reception.dateReception|date('d-m-Y') }}{% endif %}</td>
+            <td> {{ reception.fournisseur.nom }}</td>
+            <td> {{ reception.qteReception }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

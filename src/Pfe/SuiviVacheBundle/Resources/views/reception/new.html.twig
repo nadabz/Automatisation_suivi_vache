@@ -1,0 +1,58 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% block title %}Nouvelle Réception d'aliment{% endblock %}
+{% block title_parag %}Nouvelle Réception d'aliment{% endblock %}
+{% block body %}
+
+    <h2>Ajouter une réception d'un aliment </h2>
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-info" href="{{ path('reception_index') }}"><span class="fa fa-bars"></span> Liste
+                        des
+                        réceptions</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{ form_start(form,{'attr':{'id':'form_reception','url':path('historique_aliment')} }) }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.aliment) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.fournisseur) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.dateReception,{'value':"now"|date("d/m/Y")}) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.qteReception) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Enregistrer"/>
+        </div>
+    </div>
+    {{ form_end(form) }}
+    <div class="portlet-grid  panel-success" style="margin-top: 20px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">Les Réceptions Précédentes</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <img src="{{ asset('images/loading.svg') }}" class="loading_reception" style="display: none;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 body_reception">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

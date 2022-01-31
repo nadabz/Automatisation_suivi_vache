@@ -1,0 +1,45 @@
+{% extends 'layout_admin.html.twig' %}
+{% block title %}Liste des races des vaches{% endblock %}
+{% block title_parag %}Liste des races des vaches{% endblock %}
+{% block body %}
+<div class="row marg_bot_20">
+    <div class="col-md-12">
+        <ul class="liste_btn_action">
+            <li>
+                <a class="btn btn-primary" href="{{ path('race_new') }}"><span class="fa fa-plus"></span>Ajouter une race </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Libelle</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for race in races %}
+            <tr>
+                <td>{{ race.libelle }}</td>
+                <td>
+                    <ul class="liste_btn_action">
+                        <li>
+                            <a class="btn btn-warning btn-xs" href="{{ path('race_edit', { 'id': race.id }) }}"> <span class="fa fa-edit"></span> Modifier</a>
+                        </li>
+
+                        <li>
+
+                            <a class="btn btn-info btn-xs" href="{{ path('race_show', { 'id': race.id }) }}"> <span class="fa fa-info"></span>Détails</a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div></div>
+{% endblock %}

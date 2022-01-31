@@ -1,0 +1,46 @@
+{% extends 'layout_admin.html.twig' %}
+{% block title %}Catégorie d'âge{% endblock %}
+{% block title_parag %}Catégorie d'âge{% endblock %}
+{% block body %}
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-primary" href="{{ path('trancheage_new') }}"><span class="fa fa-plus"></span> Ajouter une tranche d'âge</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-12">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Min âge</th>
+                <th>Max âge</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for trancheAge in trancheAges %}
+            <tr>
+                <td>{{ trancheAge.minAge }}</td>
+                <td>{{ trancheAge.maxAge }}</td>
+                <td>
+                    <ul class="liste_btn_action">
+                        <li>
+                            <a class="btn btn-info btn-xs" href="{{ path('trancheage_edit', { 'id': trancheAge.id }) }}"><span class="fa fa-edit"></span>Modifier</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-warning btn-xs" href="{{ path('trancheage_show', { 'id': trancheAge.id }) }}"><span class="fa fa-info"></span>Détails</a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div></div>
+
+{% endblock %}

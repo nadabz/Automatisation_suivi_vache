@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Productionlait</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ productionlait.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if productionlait.date %}{{ productionlait.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Qtelait</th>
+                <td>{{ productionlait.qtelait }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('productionlait_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('productionlait_edit', { 'id': productionlait.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

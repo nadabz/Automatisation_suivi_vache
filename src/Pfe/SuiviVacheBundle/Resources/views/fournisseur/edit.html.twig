@@ -1,0 +1,43 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h1> Modifier Fournisseur </h1>
+
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-info" href="{{ path('fournisseur_index') }}"><span class="fa fa-bars"></span> Liste des fournisseurs </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{ form_start(edit_form) }}
+<div class="row">
+    <div class="col-md-4">
+        {{ form_row(edit_form.code) }}
+    </div>
+    <div class="col-md-4">
+        {{ form_row(edit_form.nom) }}
+    </div>
+    <div class="col-md-4">
+        {{ form_row(edit_form.adresse) }}
+    </div>
+    <div class="col-md-4">
+        {{ form_row(edit_form.tel) }}
+    </div>
+</div>
+    <ul class="liste_btn_action">
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-success" value="Enregistrer" />
+            </div>
+        </div>
+    </ul>
+
+    {{ form_end(edit_form) }}
+
+
+{% endblock %}

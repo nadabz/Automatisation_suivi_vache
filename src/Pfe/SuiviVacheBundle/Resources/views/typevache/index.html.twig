@@ -1,0 +1,36 @@
+{% extends 'layout_admin.html.twig' %}
+{% block title %}Types des vaches{% endblock %}
+{% block title_parag %}Types des vaches{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeVache in typeVaches %}
+            <tr>
+                <td>{{ typeVache.type }}</td>
+                <td>
+                        <ul class="liste_btn_action">
+                            <li>
+                                <a class="btn btn-warning btn-xs" href="{{ path('typevache_edit', { 'id': typeVache.id }) }}"><span class="fa fa-edit"></span>Modifier</a>
+                            </li>
+                        <li>
+                            <a class="btn btn-info btn-xs" href="{{ path('typevache_show', { 'id': typeVache.id }) }}"><span class="fa fa-info">Détails</span></a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div></div>
+
+{% endblock %}

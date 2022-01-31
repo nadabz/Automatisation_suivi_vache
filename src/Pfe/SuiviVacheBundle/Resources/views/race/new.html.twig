@@ -1,0 +1,27 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% block title %}Nouvelle race{% endblock %}
+{% block title_parag %}Nouvelle race{% endblock %}
+{% block body %}
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-primary" href="{{ path('race_index') }}"><span class="fa fa-plus"></span>Liste des races </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{ form_start(form) }}
+<div class="row">
+    <div class="col-md-6">
+        <div class="col-md-6">
+            {{ form_row(form.libelle) }}
+        </div>
+    </div></div>
+<div class="row">
+    <div class="col-md-12">
+        <input type="submit" class="btn btn-success" value="Energistrer" /></div></div>
+    {{ form_end(form) }}
+
+{% endblock %}

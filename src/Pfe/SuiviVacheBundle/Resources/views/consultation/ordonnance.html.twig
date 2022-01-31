@@ -1,0 +1,38 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <h2>Ajouter une ordonnance </h2>
+
+    {{ form_start(form) }}
+    <div class="col-md-4">
+        {{ form_row(form.medicament) }}
+    </div>
+    <div class="col-md-4">
+        {{ form_row(form.dose) }}</div>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Enregistrer"/>
+        </div>
+    </div>
+    {{ form_end(form) }}
+    <div class="portlet-grid  panel-success" style="margin-top: 20px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">Ordonnances Précédentes</h3>
+        </div>
+        <div class="panel-body">
+            {% if consultation.ordonnance.doses is defined %}
+                {% for dose_med in consultation.ordonnance.doses %}
+                    <div class="row">
+                        <div class="col-md-9">
+
+                            {{ dose_med.medicament.designation }} => {{ dose_med.dose }}<br>
+                            <hr>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

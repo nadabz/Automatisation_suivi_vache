@@ -1,0 +1,48 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body %}
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-danger supprimer_element" msg="Voulez-vous supprimer cet lot" ><span class="fa fa-trash-alt"></span> Supprimer</button>
+                    {{ form_end(delete_form) }}
+                </li>
+                <li>
+                    <a class="btn btn-info" href="{{ path('lot_index') }}"><span class="fa fa-bars"></span> Liste des lots</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <tbody>
+
+            <tr>
+                <th>Nbrevache</th>
+                <td>{{ lot.nbreVache }}</td>
+            </tr>
+            <tr>
+                <th>Numlot</th>
+                <td>{{ lot.numLot }}</td>
+            </tr>
+            <tr>
+                <th>Lot</th>
+                <td>{{ lot.etable.numero}}</td>
+            </tr>
+
+            <tr>
+                <th>Type vache</th>
+                <td>{{ lot.typevache.type}}</td>
+            </tr><tr>
+                <th>Tranche age </th>
+                <td>{{ lot.trancheage.libTrancheAge}}</td>
+            </tr><tr>
+                <th>Race</th>
+                <td>{{ lot.race.libelle}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

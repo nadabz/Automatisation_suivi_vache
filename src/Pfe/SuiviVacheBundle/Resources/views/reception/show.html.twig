@@ -1,0 +1,49 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block title %}Nouvelle vache{% endblock %}
+{% block title_parag %}Nouvelle vache{% endblock %}
+{% block body %}
+<h2>Détails réception</h2>
+<div class="row marg_bot_20">
+    <div class="col-md-12">
+        <ul class="liste_btn_action">
+            <li>
+                {{ form_start(delete_form) }}
+                <button type="submit" class="btn btn-danger supprimer_element"
+                        msg="Voulez-vous supprimer cette réception"><span class="fa fa-trash-alt"></span> Supprimer
+                </button>
+                {{ form_end(delete_form) }}
+            </li>
+            <li>
+                <a class="btn btn-info" href="{{ path('reception_index') }}"><span class="fa fa-bars"></span> Liste des
+                    réceptions</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row marg_bot_20">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <tbody>
+
+        <tbody>
+
+            <tr>
+                <th>Date reception</th>
+                <td>{% if reception.dateReception %}{{ reception.dateReception|date('Y-m-d') }}{% endif %}</td>            </tr>
+            <tr>
+
+            <th>Aliment</th>
+                <td> {{ reception.aliment.code}}</td>
+            </tr>
+   <tr>
+
+            <th>Fournisseur </th>
+
+                <td> {{ reception.fournisseur.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div></div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body %}
+    <h1>Distrubtionaliments list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Qtedistribue</th>
+                <th>Qteadistribuer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for distrubtionAliment in distrubtionAliments %}
+            <tr>
+                <td><a href="{{ path('distrubtionaliment_show', { 'id': distrubtionAliment.id }) }}">{{ distrubtionAliment.id }}</a></td>
+                <td>{% if distrubtionAliment.dateDistribution %}{{ distrubtionAliment.dateDistribution|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ distrubtionAliment.qteDistribue }}</td>
+                <td>{{ distrubtionAliment.qteADistribuer }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('distrubtionaliment_show', { 'id': distrubtionAliment.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('distrubtionaliment_edit', { 'id': distrubtionAliment.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('distrubtionaliment_new') }}">Create a new distrubtionAliment</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body %}
+    <h1>Suivipoids list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Datesuivi</th>
+                <th>Poidsactuel</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for suiviPoid in suiviPoids %}
+            <tr>
+                <td><a href="{{ path('suivipoids_show', { 'id': suiviPoid.id }) }}">{{ suiviPoid.id }}</a></td>
+                <td>{% if suiviPoid.dateSuivi %}{{ suiviPoid.dateSuivi|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ suiviPoid.poidsActuel }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('suivipoids_show', { 'id': suiviPoid.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('suivipoids_edit', { 'id': suiviPoid.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('suivipoids_new') }}">Create a new suiviPoid</a>
+        </li>
+    </ul>
+{% endblock %}

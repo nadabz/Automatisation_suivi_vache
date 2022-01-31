@@ -1,0 +1,40 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body %}
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-danger supprimer_element" msg="Voulez-vous supprimer cet aliment" ><span class="fa fa-trash-alt"></span> Supprimer</button>
+                    {{ form_end(delete_form) }}
+                </li>
+                <li>
+                    <a class="btn btn-info" href="{{ path('aliment_index') }}"><span class="fa fa-bars"></span> Liste des aliments</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <table class="table table-striped" >
+        <tbody>
+            <tr>
+                <th>Code</th>
+                <td>{{ aliment.code }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ aliment.designation }}</td>
+            </tr>
+            <tr>
+                <th>Qtestock</th>
+                <td>{{ aliment.qteStock }}</td>
+            </tr>
+            <tr>
+                <th>Qtemin</th>
+                <td>{{ aliment.qteMin }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

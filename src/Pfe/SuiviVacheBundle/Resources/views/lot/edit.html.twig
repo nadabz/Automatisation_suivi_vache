@@ -1,0 +1,49 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+{% block title %}Modifier lot{% endblock %}
+{% block title_parag %}Modifier lot{% endblock %}
+{% block body %}
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-info" href="{{ path('lot_index') }}"><span class="fa fa-bars"></span> Liste des lots</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{ form_start(edit_form) }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(edit_form.numLot) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.nbreVache) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(edit_form.typeVache) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.trancheAge) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(edit_form.race) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.etable) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Enregistrer" />
+        </div>
+    </div>
+
+    {{ form_end(edit_form) }}
+
+{% endblock %}

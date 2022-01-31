@@ -1,0 +1,50 @@
+{% extends 'layout_admin.html.twig' %}
+{% block title %}Liste des vaches{% endblock %}
+{% block title_parag %}Liste des vaches{% endblock %}
+{% block body %}
+<div class="row marg_bot_20">
+    <div class="col-md-12">
+        <ul class="liste_btn_action">
+            <li>
+                <a class="btn btn-primary" href="{{ path('etable_new') }}"><span class="fa fa-plus"></span> Nouvelle étable</a>
+            </li>
+        </ul>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                <th>Numero</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        {% for etable in etables %}
+            <tr>
+                <td>{{ etable.numero }}</td>
+                <td>
+                    <ul>
+                        <ul class="liste_btn_action">
+
+                        <li>
+                            <a class="btn btn-warning btn-xs" href="{{ path('etable_edit', { 'id': etable.id }) }}">Modifier <span class="fa fa-edit"></span> </a>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-info btn-xs" href="{{ path('etable_show', { 'id': etable.id }) }}"><span class="fa fa-edit"></span>Détails</a>
+                        </li>
+                    </ul>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    </div>
+</div>
+</tbody>
+
+</table>
+
+{% endblock %}

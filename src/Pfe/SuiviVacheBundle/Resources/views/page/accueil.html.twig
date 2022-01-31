@@ -1,0 +1,72 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+{% block title_parag %}Accueil{% endblock %}
+{% block body %}
+    <div class="row">
+    {% if not is_granted('ROLE_VETIRINAIRE') %}
+
+        <div class="col-md-4">
+            <a href="{{ path('etable_index') }}">
+                <div class="block_stat stat_1">
+                    <div class="nombre">{{ nb_etable }}</div>
+                    <div class="titre">Etables</div>
+                    <div class="icone"><span class="fa fa-dungeon"></span></div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{{ path('lot_index') }}">
+
+            <div class="block_stat stat_2">
+                <div class="nombre">{{ nb_lot }}</div>
+                <div class="titre">Lots</div>
+                <div class="icone"><span class="fa fa-door-open"></span></div>
+            </div>
+            </a></div>
+    {% endif %}
+
+        <div class="col-md-4">
+            <div class="block_stat stat_3">
+                <a href="{{ path('vache_index') }}">
+
+                <div class="nombre">{{ nb_vache }}</div>
+                <div class="titre">Vache</div>
+                <div class="icone"><span class="fa fa-hiboo"></span></div>
+            </div>
+        </div>
+    {% if not is_granted('ROLE_VETIRINAIRE') %}
+
+        <div class="col-md-4">
+            <div class="block_stat stat_4">
+                <a href="{{ path('race_index') }}">
+                <div class="nombre">{{ nb_race }}</div>
+                <div class="titre">Race</div>
+                <div class="icone"><span class="fa"></span></div>
+                </a></div>
+        </div>
+        <div class="col-md-4">
+            <div class="block_stat stat_5">
+                <div class="nombre">{{ nb_type }}</div>
+                <div class="titre">Type vache</div>
+                <div class="icone"><span class="fa "></span></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="block_stat stat_6">
+                <div class="nombre">{{ nb_aliment }}</div>
+                <div class="titre">Aliments</div>
+                <div class="icone"><span class="fa fa-snowflake"></span></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="block_stat stat_7">
+                <div class="nombre">{{ nb_fournisseur }}</div>
+                <div class="titre">Fournisseurs</div>
+                <div class="icone"><span class="fa fa-user"></span></div>
+            </div>
+        </div>
+    {% endif %}
+
+    </div>
+{% endblock %}

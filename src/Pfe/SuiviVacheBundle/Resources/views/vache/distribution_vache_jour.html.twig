@@ -1,0 +1,101 @@
+<ul>
+    <li>Type vache : {{ typeVache.type }}</li>
+    <li>Race : {{ race.libelle }}</li>
+    <li>Tranche age : {{ trancheAge.libTrancheAge }}</li>
+</ul>
+<div class="row marg_top_20">
+    <div class="col-md-12">
+        {% if(distrubtionAliments|length >0) %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Vache</th>
+                    <th>Code</th>
+                    <th>Designation</th>
+                    <th>Qte à distribuer</th>
+                    <th>Qte réellement distribuer</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for distrubtionAliment in distrubtionAliments %}
+                    <tr>
+                        <td>{{ distrubtionAliment.vache.numero }}</td>
+                        <td>{{ distrubtionAliment.aliment.code }}</td>
+                        <td>{{ distrubtionAliment.aliment.designation }}</td>
+                        <td>{{ distrubtionAliment.qteADistribuer }}</td>
+                        <td>{{ distrubtionAliment.qteDistribue }}</td>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-info">Aucune distribution d'aliment a été effectuer aujourd'hui</div>
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h3>Nouvelle distribution</h3>
+    </div>
+</div>
+<form id="distribution_aliment" action="{{ path('save_distribution_lot') }}" method="POST">
+    <div class="row marg_top_20">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="aliment_lot">Liste aliments</label>
+                <select name="aliment_distibuer" id="aliment_distibuer" class="form-control">
+                    <option value="">Choisissez un aliment</option>
+                    {% for ration in rations %}
+                        <option value="{{ ration.aliment.id }}" class="aliment_{{ ration.aliment.id }}"
+                                qte_distribue="{{ ration.qteADistribuer }}" qte_stock="{{ ration.aliment.qteStock }}" nb_vache="{{ lot.vaches|length }}">{{ ration.aliment.designation }}
+                            ({{ ration.aliment.code }}) ({{ ration.qteADistribuer }}kg)
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" name="qte_adistribuer" id="qte_adistribuer">
+            </div>
+        </div>
+        <div class="col-md-6 qte_dispo_aliment">
+        </div>
+    </div>
+    {% set id_vache_ch='' %}
+    {% for vache in lot.vaches %}
+        {% set id_vache_ch=id_vache_ch~vache.id~';' %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table tabble-condensed">
+                <tr>
+                    <th>Vache</th>
+                    <th>Quantité</th>
+                </tr>
+                {% for vache in lot.vaches %}
+                    <tr>
+                        <td>{{ vache.numero }}</td>
+                        <td>
+                            <input type="text" class="qte_aliment form-control" name="qte_aliment_{{ vache.id }}"
+                                   id="qte_aliment{{ vache.id }}" placeholder="Qte distribué">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <input type="hidden" name="id_vache_ch" value="{{ id_vache_ch }}">
+    <input type="hidden" name="id_lot" id="id_lot" value="{{ lot.id }}">
+</form>
+<div class="row">
+    <div class="col-md-12" style="margin-top: 28px;">
+        <button type="button" class="btn btn-primary btn-sm btn_save_distribution" >Distribuer
+        </button>
+    </div>
+</div>
+
+
+

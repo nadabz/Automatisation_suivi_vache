@@ -1,0 +1,50 @@
+{% extends 'layout_admin.html.twig' %}
+  {% block title %}Listes des récepeptions des aliments{% endblock %}
+    {% block title_parag %}Listes des récepeptions des aliments{% endblock %}
+
+{% block body %}
+    <h2>Liste des Réceptions des aliments </h2>
+    <hr class="hr_titre_page">
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                    <li>
+                        <a class="btn btn-primary" href="{{ path('reception_new') }}"><span class="fa fa-plus"></span> Nouvelle
+                            Réception </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <th>Date de réception  </th>
+                <th>Aliment </th>
+                <th>Fournisseur </th>
+
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reception in receptions %}
+            <tr>
+                <td>{% if reception.dateReception %}{{ reception.dateReception|date('Y-m-d') }}{% endif %}</td>
+                <td> {{ reception.aliment.code}}</td>
+                <td> {{ reception.fournisseur.nom }}</td>
+                <td>
+                    <ul class="liste_btn_action">
+                        <li>
+                        <a class="btn btn-warning btn-xs" href="{{ path('reception_edit', { 'id': reception.id }) }}"><span class="fa fa-edit"></span>Modifier </a>                        </li>
+
+                        <li>
+                            <a class="btn btn-info btn-xs" href="{{ path('reception_show', { 'id': reception.id }) }}"><span class="fa fa-info"></span> Détails</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

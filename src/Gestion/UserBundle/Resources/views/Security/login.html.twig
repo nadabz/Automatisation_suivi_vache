@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Authentification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        } </script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all">
+    <!-- Custom Theme files -->
+    <link href="{{ asset('css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>
+    <!--js-->
+    <script src="{{asset('js/jquery-2.1.1.min.js')}}"></script>
+    <!--icons-css-->
+    <link href="{{asset('css/font-awesome.css')}}" rel="stylesheet">
+    <!--Google Fonts-->
+    <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Work+Sans:400,500,600' rel='stylesheet' type='text/css'>
+    <!--static chart-->
+</head>
+<body>
+<div class="login-page">
+    <div class="login-main">
+        <div class="login-head">
+            <h1>Authentification</h1>
+        </div>
+        <div class="login-block">
+            {% if error %}
+                <div id="login-alert" class="alert alert-danger col-sm-12">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+            <form action="{{ path('login_check') }}" method="POST">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                <input type="text" id="username" name="_username" class="lock"
+                       value="{{ last_username }}" placeholder="Identifiant" required="required" autocomplete="off"/>
+                <input type="password" id="password" name="_password" class="lock"
+                       placeholder="Mot de passe" required="required"/>
+
+                <input type="submit" id="_submit" name="_submit"  value="Valider"/>
+            </form>
+        </div>
+    </div>
+</div>
+<!--inner block end here-->
+<!--copy rights start here-->
+<div class="copyrights">
+    <p>© 2019 La ferme. Tous droits réservés, créer par <a href="mailto:nada@gmail.com" target="_blank">Nada</a></p>
+</div>
+<!--COPY rights end here-->
+
+<!--scrolling js-->
+<script src="{{ asset('js/jquery.nicescroll.js') }}"></script>
+<script src="{{ asset('js/scripts.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+</body>
+</html>
+
+
+
+

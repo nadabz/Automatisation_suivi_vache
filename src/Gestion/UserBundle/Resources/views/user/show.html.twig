@@ -1,0 +1,67 @@
+{% extends 'layout_admin.html.twig' %}
+{% block body %}
+    <h2>Détails utilisateur</h2>
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    {{ form_start(delete_form) }}
+
+                    <button class='btn btn-danger supprimer_element'
+                            data-msg="Voulez vous vraiement supprimer cet utilisateur?" type="button">Supprimer <span
+                                class="fa fa-trash-alt"></span></button>
+                    {{ form_end(delete_form) }}
+                </li>
+                <li>
+                    <a class="btn btn-warning" href="{{ path('user_edit', { 'id': user.id }) }}"><span
+                                class="fa fa-edit"></span>Modifier</a>
+                </li>
+                <li>
+                    <a class="btn btn-info" href="{{ path('user_index') }}"><span class="fa fa-bars"></span>
+                        Liste des utilisateurs</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Prénom</th>
+                    <td>{{ user.firstName }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ user.lastName }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Identifiant</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                {% if not is_granted('ROLE_ADMIN') %}
+                    <tr>
+                        <th>Actif</th>
+                        <td>
+                            {% if user.active %}
+                                <span class="label label-success">Oui</span>
+                            {% else %}
+                                <span class="label label-danger">Non</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Rôles</th>
+                        <td>{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

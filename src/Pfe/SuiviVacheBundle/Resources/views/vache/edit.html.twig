@@ -1,0 +1,56 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+
+
+{% block title %}Modifier vache{% endblock %}
+{% block title_parag %}Modifier vache{% endblock %}
+{% block body %}
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-info" href="{{ path('vache_index') }}"><span class="fa fa-bars"></span> Liste des vaches</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{ form_start(edit_form) }}
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(edit_form.numero) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(edit_form.age) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.vacheMere) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.fournisseur) }}
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(edit_form.race) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(edit_form.typeVache) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(edit_form.dateNaissance) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(edit_form.poidNaissance) }}
+        </div>
+    </div>
+<ul class="liste_btn_action">
+
+<div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Enregistrer" />
+        </div>
+    </div>
+</ul>
+    {{ form_end(edit_form) }}
+{% endblock %}

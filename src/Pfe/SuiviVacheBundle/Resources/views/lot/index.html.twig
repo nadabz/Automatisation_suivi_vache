@@ -1,0 +1,125 @@
+{% extends 'layout_admin.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    <a class="btn btn-primary" href="{{ path('lot_new') }}"><span class="fa fa-plus"></span> Nouveau lot</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form_row(form.numLot,{'value':app.request.get('numero')}) }}
+                </div>
+
+            <div class="col-md-3" style="margin-top: 25px;">
+                    <button type="submit" class="btn btn-success"><span class="fa fa-search"></span></button>
+                    <a href="{{ path('lot_index') }}" class="btn btn-danger"><span class="fa fa-times"></span></a>
+                </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Lot</th>
+            <th>Nbre vaches</th>
+            <th>Vaches</th>
+            <th>Etable</th>
+            <th>Type vache</th>
+            <th>Tranche age</th>
+            <th>Race</th>
+
+
+            <th class="text-right">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for lot in lots %}
+            <tr>
+                <td>{{ lot.numLot }}</td>
+                <td>{{ lot.nbreVache }}</td>
+                <td>
+                    <ul style="padding-inline-start: 0px;">
+                        {% for vache in lot.vaches %}
+                            <li><a href="{{ path('vache_show',{'id':vache.id}) }}" target="_blank">{{ vache.numero }}</a> </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>{{ lot.etable.numero }}</td>
+                <td>{{ lot.typevache.type }}</td>
+                <td> {{ lot.trancheage.libTrancheAge }}</td>
+                <td>{{ lot.race.libelle }}</td>
+
+                <td>
+                    <ul class="liste_btn_action">
+                        <li>
+                            <a class="btn btn-warning btn-xs" href="{{ path('lot_edit', { 'id': lot.id }) }}"><span
+                                        class="fa fa-edit"></span> Modifier</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-info btn-xs" href="{{ path('lot_show', { 'id': lot.id }) }}"><span
+                                        class="fa fa-info"></span> Détails</a>
+                        </li>
+                        <li>
+                            <button class="btn btn-success btn-xs btn_distribution"
+                                    id="btn_dist_{{ lot.id }}"
+                                    id_lot="{{ lot.id }}"
+                                    num_lot="{{ lot.numLot }}"
+                                    id_type_vache="{{ lot.typevache.id }}"
+                                    id_race_vache="{{ lot.race.id }}"
+                                    id_tranche_vache="{{ lot.trancheage.id }}"
+                                    url="{{ path('distribution_aliment_jour') }}"><span class="fa fa-dice"></span>
+                                Distribution
+                            </button>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <!-- Modal -->
+    <div class="modal fade" id="modalDistribution" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="titre_modal_distribution"></h4>
+                </div>
+                <div class="modal-body">
+                    <div id="body_modal_detail_lot">
+
+                    </div>
+
+                    <div id="body_modal_distribution">
+                        <div class="liste_distribution_jour">
+
+                        </div>
+                    </div>
+                    <div id="body_modal_distribution">
+
+                    </div>
+
+                    <input type="hidden" id="id_lot_distribution">
+                </div>
+                <div class="modal-footer">
+                    <img src="{{ asset('images/loading.svg') }}" class="loading_action">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+{% endblock %}

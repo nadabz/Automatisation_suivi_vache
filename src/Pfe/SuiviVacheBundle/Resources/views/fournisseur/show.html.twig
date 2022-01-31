@@ -1,0 +1,42 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block body %}
+    <h2>Détails Fournisseur</h2>
+    <div class="row marg_bot_20">
+        <div class="col-md-12">
+            <ul class="liste_btn_action">
+                <li>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-danger supprimer_element"
+                            msg="Voulez-vous supprimer cet fournisseur"><span class="fa fa-trash-alt"></span> Supprimer
+                    </button>
+                    {{ form_end(delete_form) }}
+                </li>
+                <li>
+                    <a class="btn btn-info" href="{{ path('fournisseur_index') }}"><span class="fa fa-bars"></span> Liste des
+                        fournisseur</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<div class="row marg_bot_20">
+    <div class="col-md-12">
+        <table class="table table-striped">
+        <tbody>
+
+                <th>Nom</th>
+                <td>{{ fournisseur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ fournisseur.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ fournisseur.tel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div></div>
+{% endblock %}
